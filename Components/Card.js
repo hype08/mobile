@@ -1,18 +1,18 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const Card = () => {
+const Card = props => {
     return (
         <Container>
             <Cover>
-                <Image source={require('../assets/background1.jpg')}/>
-                <Title>Styled Components</Title>
+                <Image source={props.image} />
+                <Title>{props.title}</Title>
             </Cover>
             <Content>
-                <Logo source={require('../assets/logo-react.png')}/>
+                <Logo source={props.logo}/>
                 <Wrapper>
-                    <Caption>React Native</Caption>
-                    <Subtitle>5 of 12</Subtitle>
+                    <Caption>{props.caption}</Caption>
+                    <Subtitle>{props.subtitle}</Subtitle>
                 </Wrapper>
             </Content>
         </Container>
