@@ -1,17 +1,19 @@
 import React from "react";
 import { ScrollView, SafeAreaView } from "react-native";
 import styled from "styled-components";
-import Card from "./Components/Card";
+import Card from "./components/Card";
+import { NotificationIcon } from "./components/Icons";
 
 export default function App(props) {
   return (
     <Container>
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: "#f0f3f5" }}>
         <ScrollView style={{ height: "100%" }}>
           <TitleBar>
             <Avatar source={require("./assets/avatar.jpg")} />
             <Title>Welcome back, </Title>
             <Name>Henry</Name>
+            <NotificationIcon />
           </TitleBar>
           <Subtitle>Continue Learning</Subtitle>
           <ScrollView
