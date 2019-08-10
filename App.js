@@ -1,8 +1,10 @@
 import React from "react";
 import { ScrollView, SafeAreaView } from "react-native";
 import styled from "styled-components";
+import { Ionicons } from "@expo/vector-icons";
 
 import Card from "./components/Card";
+import Logo from "./components/Logo";
 
 export default function App(props) {
   return (
@@ -13,7 +15,9 @@ export default function App(props) {
             <Avatar source={require("./assets/avatar.jpg")} />
             <Title>Welcome back, </Title>
             <Name>Henry</Name>
+            <Icon name="ios-notifications" size={32} color="#4775f2" />
           </TitleBar>
+          <Logo image={require("./assets/logo-framerx.png")} text="FramerX" />
           <Subtitle>Continue Learning</Subtitle>
           <ScrollView
             horizontal={true}
@@ -41,6 +45,11 @@ export default function App(props) {
   );
 }
 
+const Icon = styled(Ionicons)`
+  position: absolute;
+  right: 25;
+  top: 15;
+`;
 const Avatar = styled.Image`
   width: 44px;
   height: 44px;
