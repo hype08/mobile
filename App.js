@@ -17,7 +17,13 @@ export default function App(props) {
             <Name>Henry</Name>
             <Icon name="ios-notifications" size={32} color="#4775f2" />
           </TitleBar>
-          <Logo image={require("./assets/logo-framerx.png")} text="FramerX" />
+          <ScrollView
+            style={{ flexDirection: "row", padding: 20, paddingLeft: 12 }}
+            horizontal={true}
+          >
+            <Logo image={require("./assets/logo-figma.png")} text="Figma" />
+            <Logo image={require("./assets/logo-framerx.png")} text="FramerX" />
+          </ScrollView>
           <Subtitle>Continue Learning</Subtitle>
           <ScrollView
             horizontal={true}
