@@ -18,7 +18,12 @@ export default function App(props) {
             <Icon name="ios-notifications" size={32} color="#4775f2" />
           </TitleBar>
           <ScrollView
-            style={{ flexDirection: "row", padding: 20, paddingLeft: 12 }}
+            style={{
+              flexDirection: "row",
+              padding: 20,
+              paddingLeft: 12,
+              paddingTop: 30
+            }}
             horizontal={true}
           >
             <Logo image={require("./assets/logo-figma.png")} text="Figma" />
