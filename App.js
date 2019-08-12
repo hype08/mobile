@@ -5,6 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 import Card from "./components/Card";
 import Logo from "./components/Logo";
+import Course from "./components/Course";
 
 export default function App(props) {
   return (
@@ -48,6 +49,19 @@ export default function App(props) {
               />
             ))}
           </ScrollView>
+          <Subtitle>Popular Courses</Subtitle>
+          {courses.map((course, index) => (
+            <Course
+              key={index}
+              image={course.image}
+              logo={course.logo}
+              subtitle={course.subtitle}
+              title={course.title}
+              author={course.author}
+              caption={course.caption}
+              avatar={course.avatar}
+            />
+          ))}
         </ScrollView>
       </SafeAreaView>
     </Container>
@@ -157,5 +171,45 @@ const cards = [
     subtitle: "React Native",
     caption: "4 of 12 sections",
     logo: require("./assets/logo-react.png")
+  }
+];
+
+const courses = [
+  {
+    title: "Prototype in InVision Studio",
+    subtitle: "10 sections",
+    image: require("./assets/background13.jpg"),
+    logo: require("./assets/logo-studio.png"),
+    author: "Meng To",
+    avatar: require("./assets/avatar.jpg"),
+    caption: "Design an interactive prototype"
+  },
+  {
+    title: "React for Designers",
+    subtitle: "12 sections",
+    image: require("./assets/background11.jpg"),
+    logo: require("./assets/logo-react.png"),
+    author: "Meng To",
+    avatar: require("./assets/avatar.jpg"),
+    caption: "Learn to design and code a React site"
+  },
+  {
+    title: "Design and Code with Framer X",
+    subtitle: "10 sections",
+    image: require("./assets/background14.jpg"),
+    logo: require("./assets/logo-framerx.png"),
+    author: "Meng To",
+    avatar: require("./assets/avatar.jpg"),
+    caption: "Create powerful design and code components for your app"
+  },
+  {
+    title: "Design System in Figma",
+    subtitle: "10 sections",
+    image: require("./assets/background6.jpg"),
+    logo: require("./assets/logo-figma.png"),
+    author: "Meng To",
+    avatar: require("./assets/avatar.jpg"),
+    caption:
+      "Complete guide to designing a site using a collaborative design tool"
   }
 ];
