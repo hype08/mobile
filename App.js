@@ -37,20 +37,16 @@ export default function App(props) {
             style={{ paddingBottom: 30 }}
             showsHorizontalScrollIndicator={false}
           >
-            <Card
-              image={require("./assets/background1.jpg")}
-              title="Styled Components"
-              logo={require("./assets/logo-react.png")}
-              caption="React Native"
-              subtitle="5 of 12"
-            />
-            <Card
-              image={require("./assets/background2.jpg")}
-              title="Framer X"
-              logo={require("./assets/logo-framerx.png")}
-              caption="Framer X"
-              subtitle="6 of 12"
-            />
+            {cards.map((card, index) => (
+              <Card
+                key={index}
+                image={card.image}
+                title={card.title}
+                logo={card.logo}
+                caption={card.caption}
+                subtitle={card.subtitle}
+              />
+            ))}
           </ScrollView>
         </ScrollView>
       </SafeAreaView>
@@ -130,5 +126,36 @@ const logos = [
   {
     image: require("./assets/logo-sketch.png"),
     text: "Sketch"
+  }
+];
+
+const cards = [
+  {
+    title: "React Native for Designers",
+    image: require("./assets/background11.jpg"),
+    subtitle: "React Native",
+    caption: "1 of 12 sections",
+    logo: require("./assets/logo-react.png")
+  },
+  {
+    title: "Styled Components",
+    image: require("./assets/background12.jpg"),
+    subtitle: "React Native",
+    caption: "2 of 12 sections",
+    logo: require("./assets/logo-react.png")
+  },
+  {
+    title: "Props and Icons",
+    image: require("./assets/background13.jpg"),
+    subtitle: "React Native",
+    caption: "3 of 12 sections",
+    logo: require("./assets/logo-react.png")
+  },
+  {
+    title: "Static Data and Loop",
+    image: require("./assets/background14.jpg"),
+    subtitle: "React Native",
+    caption: "4 of 12 sections",
+    logo: require("./assets/logo-react.png")
   }
 ];
