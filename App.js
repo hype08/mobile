@@ -11,7 +11,10 @@ export default function App(props) {
   return (
     <Container>
       <SafeAreaView style={{ flex: 1, backgroundColor: "#f0f3f5" }}>
-        <ScrollView style={{ height: "100%" }}>
+        <ScrollView
+          style={{ height: "100%" }}
+          showsVerticalScrollIndicator={false}
+        >
           <TitleBar>
             <Avatar source={require("./assets/avatar.jpg")} />
             <Title>Welcome back, </Title>
@@ -180,7 +183,7 @@ const courses = [
     subtitle: "10 sections",
     image: require("./assets/background13.jpg"),
     logo: require("./assets/logo-studio.png"),
-    author: "Meng To",
+    author: "Henry",
     avatar: require("./assets/avatar.jpg"),
     caption: "Design an interactive prototype"
   },
@@ -189,7 +192,7 @@ const courses = [
     subtitle: "12 sections",
     image: require("./assets/background11.jpg"),
     logo: require("./assets/logo-react.png"),
-    author: "Meng To",
+    author: "Henry",
     avatar: require("./assets/avatar.jpg"),
     caption: "Learn to design and code a React site"
   },
@@ -198,7 +201,7 @@ const courses = [
     subtitle: "10 sections",
     image: require("./assets/background14.jpg"),
     logo: require("./assets/logo-framerx.png"),
-    author: "Meng To",
+    author: "Henry",
     avatar: require("./assets/avatar.jpg"),
     caption: "Create powerful design and code components for your app"
   },
@@ -207,7 +210,7 @@ const courses = [
     subtitle: "10 sections",
     image: require("./assets/background6.jpg"),
     logo: require("./assets/logo-figma.png"),
-    author: "Meng To",
+    author: "Henry",
     avatar: require("./assets/avatar.jpg"),
     caption:
       "Complete guide to designing a site using a collaborative design tool"
