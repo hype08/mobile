@@ -6,10 +6,12 @@ import { Ionicons } from "@expo/vector-icons";
 import Card from "./components/Card";
 import Logo from "./components/Logo";
 import Course from "./components/Course";
+import Menu from "./components/Menu";
 
 export default function App(props) {
   return (
     <Container>
+      <Menu />
       <SafeAreaView style={{ flex: 1, backgroundColor: "#f0f3f5" }}>
         <ScrollView
           style={{ height: "100%" }}
