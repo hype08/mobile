@@ -26,7 +26,11 @@ class Menu extends React.Component {
   render() {
     return (
       <AnimatedContainer style={{ top: this.state.top }}>
-        <Cover />
+        <Cover>
+          <Image source={require("../assets/background1.jpg")} />
+          <Title>Henry</Title>
+          <Subtitle>User</Subtitle>
+        </Cover>
         <TouchableOpacity
           onPress={this.toggleMenu}
           style={{
@@ -48,6 +52,24 @@ class Menu extends React.Component {
 }
 
 export default Menu;
+
+const Image = styled.Image`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+`;
+
+const Title = styled.Text`
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+`;
+
+const Subtitle = styled.Text`
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 8px;
+`;
 
 const Icon = styled(Ionicons)``;
 
@@ -74,6 +96,8 @@ const AnimatedContainer = Animated.createAnimatedComponent(Container);
 const Cover = styled.View`
   height: 142px;
   background: black;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Content = styled.View`
