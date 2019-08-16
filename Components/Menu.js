@@ -1,12 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { Animated, TouchableOpacity } from "react-native";
+import { Animated, TouchableOpacity, Dimensions } from "react-native";
 
 import { Ionicons } from "@expo/vector-icons";
 
+const screenHeight = Dimensions.get("window").height;
+
 class Menu extends React.Component {
   state = {
-    top: new Animated.Value(900)
+    top: new Animated.Value(screenHeight)
   };
 
   componentDidMount() {
@@ -17,7 +19,7 @@ class Menu extends React.Component {
 
   toggleMenu = () => {
     Animated.spring(this.state.top, {
-      toValue: 900
+      toValue: screenHeight
     }).start();
   };
 
@@ -25,7 +27,16 @@ class Menu extends React.Component {
     return (
       <AnimatedContainer style={{ top: this.state.top }}>
         <Cover />
-        <TouchableOpacity onPress={this.toggleMenu}>
+        <TouchableOpacity
+          onPress={this.toggleMenu}
+          style={{
+            position: "absolute",
+            top: 120,
+            left: "50%",
+            marginLeft: -22,
+            zIndex: 1
+          }}
+        >
           <Closeview>
             <Icon name="ios-close" size={44} color="#546bfb" />
           </Closeview>
@@ -47,6 +58,7 @@ const Closeview = styled.View`
   background: white;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 `;
 
 const Container = styled.View`
@@ -65,6 +77,6 @@ const Cover = styled.View`
 `;
 
 const Content = styled.View`
-  height: 900px;
+  height: ${screenHeight};
   background: #f0f3f5;
 `;
