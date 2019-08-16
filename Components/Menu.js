@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Animated, TouchableOpacity, Dimensions } from "react-native";
 
 import { Ionicons } from "@expo/vector-icons";
+import MenuItem from "./MenuItem";
 
 const screenHeight = Dimensions.get("window").height;
 
@@ -45,7 +46,9 @@ class Menu extends React.Component {
             <Icon name="ios-close" size={44} color="#546bfb" />
           </Closeview>
         </TouchableOpacity>
-        <Content />
+        <Content>
+          <MenuItem />
+        </Content>
       </AnimatedContainer>
     );
   }
