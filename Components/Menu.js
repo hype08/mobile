@@ -47,7 +47,14 @@ class Menu extends React.Component {
           </Closeview>
         </TouchableOpacity>
         <Content>
-          <MenuItem />
+          {items.map((item, index) => (
+            <MenuItem
+              key={index}
+              icon={item.icon}
+              text={item.text}
+              title={item.title}
+            />
+          ))}
         </Content>
       </AnimatedContainer>
     );
@@ -106,4 +113,28 @@ const Cover = styled.View`
 const Content = styled.View`
   height: ${screenHeight};
   background: #f0f3f5;
+  padding: 50px;
 `;
+
+const items = [
+  {
+    icon: "ios-settings",
+    title: "Account",
+    text: "settings"
+  },
+  {
+    icon: "ios-card",
+    title: "Billing",
+    text: "payments"
+  },
+  {
+    icon: "ios-compass",
+    title: "Learn React",
+    text: "start course"
+  },
+  {
+    icon: "ios-exit",
+    title: "Log out",
+    text: "see you soon!"
+  }
+];
