@@ -16,6 +16,8 @@
     "react-native-ionicons": "^4.6.1",
     "react-native-svg": "^9.5.1",
     "react-native-web": "^0.11.4",
+    "react-redux": "^7.1.0",
+    "redux": "^4.0.4",
     "styled-components": "^4.3.2"
   },
   "devDependencies": {
