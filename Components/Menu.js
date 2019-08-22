@@ -86,7 +86,7 @@ const Icon = styled(Ionicons)``;
 const Closeview = styled.View`
   width: 44px;
   height: 44px;
-  border-radius: 22px;
+  border-radius: 22px
   background: white;
   justify-content: center;
   align-items: center;
