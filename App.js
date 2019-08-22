@@ -13,8 +13,10 @@ const reducer = (state = initialState) => {
 
 const store = createStore(reducer);
 
-export default const App = () => (
+const App = () => (
   <Provider store={store}>
     <HomeScreen />
   </Provider>
 );
+
+export default App;
