@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { Animated, TouchableOpacity, Dimensions } from "react-native";
-
 //use state from Redux
 import { connect } from "react-redux";
 
@@ -13,6 +12,15 @@ function mapStateToProps(state) {
   return { action: state.action };
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    closeMenu: () =>
+      dispatch({
+        type: "CLOSE_MENU"
+      })
+  };
+}
+
 const screenHeight = Dimensions.get("window").height;
 
 class Menu extends React.Component {
@@ -20,16 +28,28 @@ class Menu extends React.Component {
     top: new Animated.Value(screenHeight)
   };
 
+  //on load
   componentDidMount() {
-    Animated.spring(this.state.top, {
-      toValue: 0
-    }).start();
+    this.toggleMenu();
+  }
+
+  //on button press
+  componentDidUpdate() {
+    this.toggleMenu();
   }
 
   toggleMenu = () => {
-    Animated.spring(this.state.top, {
-      toValue: screenHeight
-    }).start();
+    if (this.props.action == "openMenu") {
+      Animated.spring(this.state.top, {
+        toValue: 0
+      }).start();
+    }
+
+    if (this.props.action == "closeMenu") {
+      Animated.spring(this.state.top, {
+        toValue: screenHeight
+      }).start();
+    }
   };
 
   render() {
@@ -41,7 +61,7 @@ class Menu extends React.Component {
           <Subtitle>User</Subtitle>
         </Cover>
         <TouchableOpacity
-          onPress={this.toggleMenu}
+          onPress={this.props.closeMenu}
           style={{
             position: "absolute",
             top: 120,
@@ -70,7 +90,10 @@ class Menu extends React.Component {
 }
 
 //Redux connect to link component and props
-export default connect(mapStateToProps)(Menu);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Menu);
 
 const Image = styled.Image`
   position: absolute;

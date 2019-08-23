@@ -2,76 +2,100 @@ import React from "react";
 import { ScrollView, SafeAreaView } from "react-native";
 import styled from "styled-components";
 import { Ionicons } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native";
+import { connect } from "react-redux";
 
 import Card from "../components/Card";
 import Logo from "../components/Logo";
 import Course from "../components/Course";
 import Menu from "../components/Menu";
 
-export default function HomeScreen(props) {
-  return (
-    <Container>
-      <Menu />
-      <SafeAreaView style={{ flex: 1, backgroundColor: "#f0f3f5" }}>
-        <ScrollView
-          style={{ height: "100%" }}
-          showsVerticalScrollIndicator={false}
-        >
-          <TitleBar>
-            <Avatar source={require("../assets/avatar.jpg")} />
-            <Title>Welcome back, </Title>
-            <Name>Henry</Name>
-            <Icon name="ios-notifications" size={32} color="#4775f2" />
-          </TitleBar>
+function mapStateToProps(state) {
+  return { action: state.action };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    openMenu: () =>
+      dispatch({
+        type: "OPEN_MENU"
+      })
+  };
+}
+
+class HomeScreen extends React.Component {
+  render() {
+    return (
+      <Container>
+        <Menu />
+        <SafeAreaView style={{ flex: 1, backgroundColor: "#f0f3f5" }}>
           <ScrollView
-            style={{
-              flexDirection: "row",
-              padding: 20,
-              paddingLeft: 12,
-              paddingTop: 30
-            }}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
+            style={{ height: "100%" }}
+            showsVerticalScrollIndicator={false}
           >
-            {logos.map((logo, index) => (
-              <Logo key={index} image={logo.image} text={logo.text} />
-            ))}
-          </ScrollView>
-          <Subtitle>Continue Learning</Subtitle>
-          <ScrollView
-            horizontal={true}
-            style={{ paddingBottom: 30 }}
-            showsHorizontalScrollIndicator={false}
-          >
-            {cards.map((card, index) => (
-              <Card
+            <TitleBar>
+              <TouchableOpacity onPress={this.props.openMenu}>
+                <Avatar source={require("../assets/avatar.jpg")} />
+              </TouchableOpacity>
+              <Title>Welcome back, </Title>
+              <Name>Henry</Name>
+              <Icon name="ios-notifications" size={32} color="#4775f2" />
+            </TitleBar>
+            <ScrollView
+              style={{
+                flexDirection: "row",
+                padding: 20,
+                paddingLeft: 12,
+                paddingTop: 30
+              }}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            >
+              {logos.map((logo, index) => (
+                <Logo key={index} image={logo.image} text={logo.text} />
+              ))}
+            </ScrollView>
+            <Subtitle>Continue Learning</Subtitle>
+            <ScrollView
+              horizontal={true}
+              style={{ paddingBottom: 30 }}
+              showsHorizontalScrollIndicator={false}
+            >
+              {cards.map((card, index) => (
+                <Card
+                  key={index}
+                  image={card.image}
+                  title={card.title}
+                  logo={card.logo}
+                  caption={card.caption}
+                  subtitle={card.subtitle}
+                />
+              ))}
+            </ScrollView>
+            <Subtitle>Popular Courses</Subtitle>
+            {courses.map((course, index) => (
+              <Course
                 key={index}
-                image={card.image}
-                title={card.title}
-                logo={card.logo}
-                caption={card.caption}
-                subtitle={card.subtitle}
+                image={course.image}
+                logo={course.logo}
+                subtitle={course.subtitle}
+                title={course.title}
+                author={course.author}
+                caption={course.caption}
+                avatar={course.avatar}
               />
             ))}
           </ScrollView>
-          <Subtitle>Popular Courses</Subtitle>
-          {courses.map((course, index) => (
-            <Course
-              key={index}
-              image={course.image}
-              logo={course.logo}
-              subtitle={course.subtitle}
-              title={course.title}
-              author={course.author}
-              caption={course.caption}
-              avatar={course.avatar}
-            />
-          ))}
-        </ScrollView>
-      </SafeAreaView>
-    </Container>
-  );
+        </SafeAreaView>
+      </Container>
+    );
+  }
 }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HomeScreen);
 
 const Icon = styled(Ionicons)`
   position: absolute;
@@ -83,10 +107,6 @@ const Avatar = styled.Image`
   height: 44px;
   background: black;
   border-radius: 22px;
-  margin-left: 20px;
-  position: absolute;
-  top: 0;
-  left: 0;
 `;
 
 const Subtitle = styled.Text`
