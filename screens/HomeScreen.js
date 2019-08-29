@@ -1,8 +1,14 @@
 import React from "react";
-import { ScrollView, SafeAreaView } from "react-native";
+import {
+  ScrollView,
+  SafeAreaView,
+  TouchableOpacity,
+  Animated,
+  Easing,
+  StatusBar
+} from "react-native";
 import styled from "styled-components";
 import { Ionicons } from "@expo/vector-icons";
-import { TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 
 import Card from "../components/Card";
@@ -24,73 +30,124 @@ function mapDispatchToProps(dispatch) {
 }
 
 class HomeScreen extends React.Component {
+  state = {
+    scale: new Animated.Value(1),
+    opacity: new Animated.Value(1)
+  };
+
+  componentDidUpdate() {
+    this.toggleMenu();
+  }
+
+  toggleMenu = () => {
+    if (this.props.action == "openMenu") {
+      Animated.timing(this.state.scale, {
+        toValue: 0.9,
+        duration: 300,
+        easing: Easing.in()
+      }).start();
+      Animated.spring(this.state.opacity, {
+        toValue: 0.4
+      }).start();
+
+      StatusBar.setBarStyle("light-content", true);
+    }
+
+    if (this.props.action == "closeMenu") {
+      Animated.timing(this.state.scale, {
+        toValue: 1,
+        duration: 300,
+        easing: Easing.in()
+      }).start();
+      Animated.spring(this.state.opacity, {
+        toValue: 1
+      }).start();
+      StatusBar.setBarStyle("dark-content", true);
+    }
+  };
+
   render() {
     return (
-      <Container>
+      <RootView>
         <Menu />
-        <SafeAreaView style={{ flex: 1, backgroundColor: "#f0f3f5" }}>
-          <ScrollView
-            style={{ height: "100%" }}
-            showsVerticalScrollIndicator={false}
-          >
-            <TitleBar>
-              <TouchableOpacity onPress={this.props.openMenu}>
-                <Avatar source={require("../assets/avatar.jpg")} />
-              </TouchableOpacity>
-              <Title>Welcome back, </Title>
-              <Name>Henry</Name>
-              <Icon name="ios-notifications" size={32} color="#4775f2" />
-            </TitleBar>
+        <AnimatedContainer
+          style={{
+            transform: [{ scale: this.state.scale }],
+            opacity: this.state.opacity
+          }}
+        >
+          <SafeAreaView style={{ flex: 1, backgroundColor: "#f0f3f5" }}>
             <ScrollView
-              style={{
-                flexDirection: "row",
-                padding: 20,
-                paddingLeft: 12,
-                paddingTop: 30
-              }}
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
+              style={{ height: "100%" }}
+              showsVerticalScrollIndicator={false}
             >
-              {logos.map((logo, index) => (
-                <Logo key={index} image={logo.image} text={logo.text} />
-              ))}
-            </ScrollView>
-            <Subtitle>Continue Learning</Subtitle>
-            <ScrollView
-              horizontal={true}
-              style={{ paddingBottom: 30 }}
-              showsHorizontalScrollIndicator={false}
-            >
-              {cards.map((card, index) => (
-                <Card
+              <TitleBar>
+                <TouchableOpacity
+                  onPress={this.props.openMenu}
+                  style={{ position: "absolute", top: 0, left: 20 }}
+                >
+                  <Avatar source={require("../assets/avatar.jpg")} />
+                </TouchableOpacity>
+                <Title>Welcome back, </Title>
+                <Name>Henry</Name>
+                <Icon name="ios-notifications" size={32} color="#4775f2" />
+              </TitleBar>
+              <ScrollView
+                style={{
+                  flexDirection: "row",
+                  padding: 20,
+                  paddingLeft: 12,
+                  paddingTop: 30
+                }}
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+              >
+                {logos.map((logo, index) => (
+                  <Logo key={index} image={logo.image} text={logo.text} />
+                ))}
+              </ScrollView>
+              <Subtitle>Continue Learning</Subtitle>
+              <ScrollView
+                horizontal={true}
+                style={{ paddingBottom: 30 }}
+                showsHorizontalScrollIndicator={false}
+              >
+                {cards.map((card, index) => (
+                  <Card
+                    key={index}
+                    image={card.image}
+                    title={card.title}
+                    logo={card.logo}
+                    caption={card.caption}
+                    subtitle={card.subtitle}
+                  />
+                ))}
+              </ScrollView>
+              <Subtitle>Popular Courses</Subtitle>
+              {courses.map((course, index) => (
+                <Course
                   key={index}
-                  image={card.image}
-                  title={card.title}
-                  logo={card.logo}
-                  caption={card.caption}
-                  subtitle={card.subtitle}
+                  image={course.image}
+                  logo={course.logo}
+                  subtitle={course.subtitle}
+                  title={course.title}
+                  author={course.author}
+                  caption={course.caption}
+                  avatar={course.avatar}
                 />
               ))}
             </ScrollView>
-            <Subtitle>Popular Courses</Subtitle>
-            {courses.map((course, index) => (
-              <Course
-                key={index}
-                image={course.image}
-                logo={course.logo}
-                subtitle={course.subtitle}
-                title={course.title}
-                author={course.author}
-                caption={course.caption}
-                avatar={course.avatar}
-              />
-            ))}
-          </ScrollView>
-        </SafeAreaView>
-      </Container>
+          </SafeAreaView>
+        </AnimatedContainer>
+      </RootView>
     );
   }
 }
+
+const RootView = styled.View`
+  background: black;
+  flex: 1;
+`;
 
 export default connect(
   mapStateToProps,
@@ -121,7 +178,11 @@ const Subtitle = styled.Text`
 const Container = styled.View`
   flex: 1;
   background-color: #f0f3f5;
+  border-radius: 10px;
+  overflow: hidden;
 `;
+
+const AnimatedContainer = Animated.createAnimatedComponent(Container);
 
 const Title = styled.Text`
   font-size: 16px;
