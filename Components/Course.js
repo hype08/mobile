@@ -22,11 +22,11 @@ const Course = props => {
 export default Course;
 
 const Container = styled.View`
-  width: 315px;
+  width: 335px;
   height: 335px;
   border-radius: 14px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-  margin: 10px 30px;
+  margin: 10px auto;
   background: white;
 `;
 
