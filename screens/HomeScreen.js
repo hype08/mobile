@@ -30,6 +30,11 @@ function mapDispatchToProps(dispatch) {
 }
 
 class HomeScreen extends React.Component {
+  static navigationOptions = {
+    title: "Section",
+    header: null
+  };
+
   state = {
     scale: new Animated.Value(1),
     opacity: new Animated.Value(1)
@@ -115,13 +120,15 @@ class HomeScreen extends React.Component {
                 {cards.map((card, index) => (
                   <TouchableOpacity
                     key={index}
-                    onPress={() => this.props.navigation.navigate("Section")}
+                    onPress={() => {
+                      this.props.navigation.push("Section");
+                    }}
                   >
                     <Card
-                      image={card.image}
                       title={card.title}
-                      logo={card.logo}
+                      image={card.image}
                       caption={card.caption}
+                      logo={card.logo}
                       subtitle={card.subtitle}
                     />
                   </TouchableOpacity>
