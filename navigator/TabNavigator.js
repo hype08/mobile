@@ -33,6 +33,7 @@ HomeStack.navigationOptions = ({ navigation }) => {
         name="ios-home"
         size={26}
         color={focused ? activeColor : inactiveColor}
+        style={{ marginTop: 5 }}
       />
     )
   };
@@ -49,6 +50,7 @@ CoursesStack.navigationOptions = {
       name="ios-albums"
       size={26}
       color={focused ? activeColor : inactiveColor}
+      style={{ marginTop: 5 }}
     />
   )
 };
@@ -64,6 +66,7 @@ ProjectsStack.navigationOptions = {
       name="ios-folder"
       size={26}
       color={focused ? activeColor : inactiveColor}
+      style={{ marginTop: 5 }}
     />
   )
 };

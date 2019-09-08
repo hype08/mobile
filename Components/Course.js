@@ -22,7 +22,7 @@ const Course = props => {
 export default Course;
 
 const Container = styled.View`
-  width: 335px;
+  width: 375px;
   height: 335px;
   border-radius: 14px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
